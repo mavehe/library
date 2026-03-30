@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Бібліотека</h1>
+
+<h2>Додати книгу</h2>
+<form action="/add_book" method="POST">
+    <input type="text" name="title" placeholder="Назва" required>
+    <input type="text" name="author" placeholder="Автор" required>
+    <input type="number" name="year" placeholder="Рік">
+    <input type="text" name="image_url" placeholder="URL картинки">
+    <textarea name="description" placeholder="Опис"></textarea>
+    <button type="submit">Додати</button>
+</form>
+
+<h2>Список книг</h2>
+
+<div class="books">
+{% for book in books %}
+    <div class="book">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.author }} ({{ book.year }})</p>
+        <img src="{{ book.image_url }}" width="100">
+        <br>
+        <a href="/book/{{ book.id }}">Детальніше</a>
+        <a href="/delete/{{ book.id }}">Видалити</a>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}
